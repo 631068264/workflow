@@ -33,7 +33,7 @@ class YouDao(object):
         def api():
             URL = 'https://openapi.youdao.com/api'
             salt = str(random.randint(1, 65536))
-            query = self.query.decode('utf-8')
+            query = self._safe_decode(self.query)
             params = {
                 'q': query.encode('utf-8'),
                 'from': 'auto',
@@ -48,7 +48,7 @@ class YouDao(object):
         def old_api():
             self.key = random.choice(OLD_KEY)
             URL = 'http://fanyi.youdao.com/openapi.do'
-            query = self.query.decode('utf-8')
+            query = self._safe_decode(self.query)
             params = {
                 'q': query.encode('utf-8'),
                 'type': 'data',
